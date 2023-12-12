@@ -82,7 +82,9 @@ interfaces = load_interfaces(interface_names)
 # **** for use live only ****
 def fingerprint(logcan, sendcan):
   fixed_fingerprint = os.environ.get('FINGERPRINT', "")
-  skip_fw_query = os.environ.get('SKIP_FW_QUERY', False)
+  fixed_fingerprint="MAZDA CX-9 2021"
+  skip_fw_query = os.environ.get('SKIP_FW_QUERY', True)
+  print("Finger",fixed_fingerprint,skip_fw_query)
 
   if not fixed_fingerprint and not skip_fw_query:
     # Vin query only reliably works thorugh OBDII
@@ -118,6 +120,7 @@ def fingerprint(logcan, sendcan):
   car_fingerprint = None
   done = False
 
+  '''
   while not done:
     a = get_one_can(logcan)
 
@@ -147,6 +150,7 @@ def fingerprint(logcan, sendcan):
     done = failed or succeeded
 
     frame += 1
+  '''
 
   exact_match = True
   source = car.CarParams.FingerprintSource.can
@@ -181,3 +185,12 @@ def get_car(logcan, sendcan):
   car_params.fuzzyFingerprint = not exact_match
 
   return CarInterface(car_params, CarController, CarState), car_params
+
+def main():
+  print("help")
+  car =get_car(None,None)
+  print(car)
+
+
+if __name__ == "__main__":
+  main()

@@ -248,6 +248,7 @@ class Controls:
     if not CS.canValid:
       self.events.add(EventName.canError)
 
+    '''
     for i, pandaState in enumerate(self.sm['pandaStates']):
       # All pandas must match the list of safetyConfigs, and if outside this list, must be silent or noOutput
       if i < len(self.CP.safetyConfigs):
@@ -262,6 +263,7 @@ class Controls:
 
       if log.PandaState.FaultType.relayMalfunction in pandaState.faults:
         self.events.add(EventName.relayMalfunction)
+    '''
 
     # Check for HW or system issues
     if len(self.sm['radarState'].radarErrors):

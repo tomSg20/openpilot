@@ -158,11 +158,11 @@ static int mazda_fwd_hook(int bus, CANPacket_t *to_fwd) {
   int addr = GET_ADDR(to_fwd);
 
   if (bus == MAZDA_MAIN) {
-    bus_fwd = MAZDA_CAM;
+    bus_fwd = -1 ;
   } else if (bus == MAZDA_CAM) {
     bool block = (addr == MAZDA_LKAS) || (addr == MAZDA_LKAS_HUD);
     if (!block) {
-      bus_fwd = MAZDA_MAIN;
+      bus_fwd = -1;
     }
   } else {
     // don't fwd
